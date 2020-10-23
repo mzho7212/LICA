@@ -63,12 +63,12 @@ Check out [PyMARL documentation](https://github.com/oxwhirl/pymarl) for more inf
 ## Visualizations
 The demo videos of two of the best battles performed by LICA agents (red) are available at `visualizations/`. The GIF previews are shown below:
 
-### 5m_vs_6m
-<img src="imgs/5m_vs_6m-cropped.gif" width="60%">
+
+|  5m_vs_6m  |  MMM2  |
+|---|---|
+| <img src="imgs/5m_vs_6m-cropped.gif" height="122%">   |  <img src="imgs/MMM2-cropped.gif" height="100%">  |
 
 
-### MMM2
-<img src="imgs/MMM2-cropped.gif" width="60%">
 
 
 
