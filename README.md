@@ -76,10 +76,10 @@ The demo videos of two of the best battles performed by LICA agents (red) are av
 
 Please cite this work if you find it useful:
 ```
-@inproceedings{zhou2020learning,
-  title={Learning Implicit Credit Assignment for Cooperative Multi-Agent Reinforcement Learning},
-  author={Zhou, Meng and Liu, Ziyu and Sui, Pengwei and Li, Yixuan and Chung, Yuk Ying},
-  booktitle={Advances in Neural Information Processing Systems},
+@article{zhou2020learning,
+  title={Learning Implicit Credit Assignment for Cooperative Multi-Agent Reinforcement Learning}, 
+  author={Meng Zhou and Ziyu Liu and Pengwei Sui and Yixuan Li and Yuk Ying Chung},
+  journal={arXiv preprint arXiv:2007.02529},
   year={2020}
 }
 ```
