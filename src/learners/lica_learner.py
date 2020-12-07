@@ -44,14 +44,12 @@ class LICALearner:
         mask[:, 1:] = mask[:, 1:] * (1 - terminated[:, :-1])
         avail_actions = batch["avail_actions"][:, :-1]
 
+        # Calculate action policy distribution and entropy
         mac_out = []
         mac_out_entropy = []
         self.mac.init_hidden(batch.batch_size)
         for t in range(batch.max_seq_length - 1):
-            # -------------------------------------------------------------------------------------#
-            # NOTE: We hard-coded the forward pass arguments for experiment, we will fix this later
-            # -------------------------------------------------------------------------------------#
-            agent_outs = self.mac.forward(batch, t=t, test_mode=True, gumbel=True)
+            agent_outs = self.mac.forward(batch, t=t, return_logits=True)
             agent_entropy = multinomial_entropy(agent_outs).mean(dim=-1, keepdim=True)
             agent_probs = th.nn.functional.softmax(agent_outs, dim=-1)
             mac_out.append(agent_probs)
@@ -64,12 +62,15 @@ class LICALearner:
         mac_out = mac_out/mac_out.sum(dim=-1, keepdim=True)
         mac_out[avail_actions == 0] = 0
 
+        # Mix action probability and state to estimate joint Q-value
         mix_loss = self.critic(mac_out, batch["state"][:, :-1])
 
         mask = mask.expand_as(mix_loss)
         entropy_mask = copy.deepcopy(mask)
 
         mix_loss = (mix_loss * mask).sum() / mask.sum()
+
+        # Adaptive Entropy Regularization
         entropy_loss = (mac_out_entropy * entropy_mask).sum() / entropy_mask.sum()
         entropy_ratio = self.entropy_coef / entropy_loss.item()
 
@@ -140,6 +141,7 @@ class LICALearner:
                 self.logger.log_stat(key, sum(running_log[key])/ts_logged, t_env)
             self.log_stats_t = t_env
 
+        # Update target critic
         if (self.critic_training_steps - self.last_target_update_episode) / self.args.target_update_interval >= 1.0:
             self._update_targets()
             self.last_target_update_episode = self.critic_training_steps

@@ -1,10 +1,3 @@
-
-```diff
-Important Notes:
-- Right now there is some hard-coding in this repo (we have added comments); we will clean up soon
-- We'll also add some more comments to improve readability
-```
-
 # Learning Implicit Credit Assignment for Cooperative Multi-Agent Reinforcement Learning (LICA)
 
 This repository hosts the official PyTorch implementation of "**Learning Implicit Credit Assignment for Cooperative Multi-Agent Reinforcement Learning**". The implementation is based on the [PyMARL](https://github.com/oxwhirl/pymarl) framework and [SMAC](https://github.com/oxwhirl/smac).

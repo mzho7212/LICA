@@ -1,4 +1,4 @@
-# --- COMA specific parameters ---
+# --- LICA specific parameters ---
 
 action_selector: "gumbel"
 epsilon_start: .5
@@ -22,7 +22,6 @@ agent_output_type: "pi_logits"
 learner: "lica_learner"
 mixing_embed_dim: 64
 hypernet_layers: 2
-critics_update_num: 1 # legacy hyperparameter, will be removed
 entropy_coef: 0.11 # 0.03 for 3s5z_vs_3s6z, 0.06 for all others
 
 name: "lica"
